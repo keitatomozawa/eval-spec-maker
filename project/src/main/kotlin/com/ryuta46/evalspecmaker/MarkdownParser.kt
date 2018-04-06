@@ -3,10 +3,7 @@ package com.ryuta46.evalspecmaker
 import com.ryuta46.evalspecmaker.util.Logger
 import org.pegdown.PegDownProcessor
 import org.pegdown.ast.*
-
-import java.io.File
-import java.io.FileReader
-import java.io.IOException
+import java.io.*
 import java.util.Locale
 
 object MarkdownParser {
@@ -18,7 +15,7 @@ object MarkdownParser {
             val inputMarkdown = File(file)
             val buff = CharArray(inputMarkdown.length().toInt())
 
-            FileReader(inputMarkdown).use { reader ->
+            InputStreamReader(FileInputStream(inputMarkdown), "UTF-8").use { reader ->
                 reader.read(buff)
                 val processor = PegDownProcessor()
                 val rootNode = processor.parseMarkdown(buff)
